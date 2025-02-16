@@ -22,4 +22,4 @@ It performs the following functions:
 
 ## Compatibility
 
-This plugin works excellently in conjunction with **PD Hide Site**—a plugin that manages content access based on user groups, allowing dynamically assigned roles to be used for restricting access.
+This plugin works excellently in conjunction with **PD Group Hide Site**—a plugin that manages content access based on user groups, allowing dynamically assigned roles to be used for restricting access.
