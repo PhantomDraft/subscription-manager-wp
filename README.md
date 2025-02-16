@@ -2,7 +2,7 @@
 
 PD Subscription Manager is a plugin for automatically managing user subscriptions with WooCommerce integration.
 
-![PD Subscription Manager is a plugin for automatically managing user subscriptions with WooCommerce integration.][(https://example.com/sunset.jpg)](https://github.com/PhantomDraft/subscription-manager-wp/blob/main/cover.png)
+![PD Subscription Manager is a plugin for automatically managing user subscriptions with WooCommerce integration.](https://github.com/PhantomDraft/subscription-manager-wp/blob/main/cover.png)
 
 It performs the following functions:
 
