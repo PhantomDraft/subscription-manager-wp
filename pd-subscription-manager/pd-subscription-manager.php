@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: PD Subscription Manager
+ * Plugin URI: https://github.com/PhantomDraft/subscription-manager-wp
  * Description: Subscription mechanism. When a specific WooCommerce product is purchased, the user is assigned a specified role for a set number of days (calculated as [quantity * days per copy]). After the subscription expires (checked daily or via the "Refresh Subscriptions" button), the user's role is reverted to the default (if specified). The "Subscribers" page displays a list of active subscriptions with the ability to edit the remaining days.
  * Version:     1.2
  * Author:      PD
@@ -64,9 +65,23 @@ class PD_Subscription_Manager {
      * Add menu items to the global "PD" menu.
      */
     public function add_admin_menu() {
-        // It is assumed that the top-level "PD" menu is already created by another plugin.
+        // Check if the global PD menu is already registered; if not, register it.
+        if ( ! defined( 'PD_GLOBAL_MENU_REGISTERED' ) ) {
+            add_menu_page(
+                'PD',                           // Title in admin area
+                'PD',                           // Menu title
+                'manage_options',               // Required capability
+                'pd_main_menu',                 // Global menu slug
+                'pd_global_menu_callback',      // Callback function for the global menu page
+                'dashicons-shield',             // Shield icon
+                2                               // Menu position
+            );
+            define( 'PD_GLOBAL_MENU_REGISTERED', true );
+        }
+
+        // Add PD Subscription Manager settings as submenus under the global PD menu
         add_submenu_page(
-            'pd_main_menu', // Parent menu "PD"
+            'pd_main_menu', // Parent menu slug
             'PD Subscription Manager – Subscription Settings',
             'PD Subscription Manager',
             'manage_options',
@@ -488,6 +503,18 @@ about-us-subscription|vip|30|subscriber
 // Register activation/deactivation hooks
 register_activation_hook( __FILE__, [ 'PD_Subscription_Manager', 'activate' ] );
 register_deactivation_hook( __FILE__, [ 'PD_Subscription_Manager', 'deactivate' ] );
+
+if ( ! function_exists( 'pd_global_menu_callback' ) ) {
+    function pd_global_menu_callback() {
+        ?>
+        <div class="wrap">
+            <h1>PD Global Menu</h1>
+            <p>Please visit our GitHub page:</p>
+            <p><a href="https://github.com/PhantomDraft" target="_blank">https://github.com/PhantomDraft</a></p>
+        </div>
+        <?php
+    }
+}
 
 // Initialize the plugin
 PD_Subscription_Manager::get_instance();
